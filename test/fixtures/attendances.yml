@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  time_in: 2019-01-26 15:00:57
+  time_out: 2019-01-26 15:00:57
+  comments: MyText
+
+two:
+  user: two
+  time_in: 2019-01-26 15:00:57
+  time_out: 2019-01-26 15:00:57
+  comments: MyText

@@ -1,0 +1,27 @@
+<table class="table table-hover">
+  <thead class="thead-light">
+    <tr>
+      <% if current_user.admin? %>
+        <th>User</th>
+      <% end %>
+      <th>Time in</th>
+      <th>Time out</th>
+      <th>Comments</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <% if current_user.admin? %>
+          <td><%= "#{attendance.user.first_name} #{attendance.user.last_name}" %></td>
+        <% end %>
+        <td><%= attendance.time_in&.strftime("%r") %></td>
+        <td><%= attendance.time_out&.strftime("%r") %></td>
+        <td><%= attendance.comments %></td>
+        <td><%= link_to 'Show', attendance %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

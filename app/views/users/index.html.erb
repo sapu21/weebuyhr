@@ -1,0 +1,32 @@
+<% unless notice.blank? %>
+  <div class="alert alert-info alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%= notice %>
+  </div>
+<% end %>
+
+<h1>Employee Directory</h1>
+
+<table class="table table-hover">
+  <thead class="thead-light">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= "#{user.first_name} #{user.last_name}" %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td><%= user.status %></td>
+        <td><%= link_to 'Show', user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
