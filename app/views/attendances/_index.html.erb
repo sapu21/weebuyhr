@@ -4,6 +4,7 @@
       <% if current_user.admin? %>
         <th>User</th>
       <% end %>
+      <th>Date</th>
       <th>Time in</th>
       <th>Time out</th>
       <th>Comments</th>
@@ -17,11 +18,17 @@
         <% if current_user.admin? %>
           <td><%= "#{attendance.user.first_name} #{attendance.user.last_name}" %></td>
         <% end %>
+        <td><%= attendance.time_in&.strftime("%v") %></td>
         <td><%= attendance.time_in&.strftime("%r") %></td>
         <td><%= attendance.time_out&.strftime("%r") %></td>
-        <td><%= attendance.comments %></td>
+        <td class="wrappable"><%= attendance.comments %></td>
         <td><%= link_to 'Show', attendance %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<div class="container">
+  <%= link_to_previous_page @attendances, '❮ Previous', class: "btn btn-primary float-left" %>
+  <%= link_to_next_page @attendances, 'Next ❯', class: "btn btn-primary float-right" %>
+</div>

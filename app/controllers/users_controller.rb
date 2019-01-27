@@ -16,18 +16,17 @@ class UsersController < ApplicationController
 
   def log_time_in
     attendance = current_user.attendances.create(time_in: DateTime.now)
-    redirect_to attendance_url(attendance), notice: "You've successfully started your day at Work. Rock it!"
+    redirect_to attendances_url, notice: "You've successfully started your day at Work. Rock it!"
   end
 
   def log_time_out
-    attendance = current_user.attendances.where('DATE(attendances.time_in) = ?', Date.today).last
+    attendance = current_user.attendances.where(time_in: Date.today.all_day).last
     if attendance.blank?
       redirect_to attendances_url, notice: "Please log you're time_in first!"
     else
       attendance.update_attributes(time_out: DateTime.now)
       redirect_to attendances_url, notice: "Thanks for your contribution! Take Rest! See you soon!"
     end
-
   end
 
   private

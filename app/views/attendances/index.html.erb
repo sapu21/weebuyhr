@@ -2,6 +2,15 @@
   .container {
     text-align: center;
   }
+  .wrappable {
+    overflow: hidden;
+    max-width: 600px;
+    word-wrap: break-word;
+    text-align: justify;
+  }
+  .table th, .table td {
+    vertical-align: middle;
+  }
 </style>
 <% unless notice.blank? %>
   <div class="alert alert-info alert-dismissible">
@@ -10,20 +19,19 @@
   </div>
 <% end %>
 
-<center><h1>Attendances</h1></center>
+
+<center>
+  <h2>Attendances</h2>
+  <% unless @time_in_present %>
+    <%= link_to 'Log Time-In', log_time_in_users_path, class: "btn btn-danger mb-3" %>
+  <% else %>
+    <%= link_to('Log Time-Out', new_comment_attendances_path, class: "btn btn-danger mb-3") unless @time_out_present %>
+  <% end %>
+</center>
+
 
 <div class="container">
   <div class="row">
-    <div class="col-6">
       <%= render "index" %>
-    </div>
-    <div class="col-6">
-      <% unless @time_in_present %>
-        <%= link_to 'Log Time-In', log_time_in_users_path, class: "btn btn-primary" %>
-      <% else %>
-        <%= link_to('Log Time-Out', log_time_out_users_path, class: "btn btn-primary") unless @time_out_present %>
-      <% end %>
-    </div>
   </div>
-
 </div>

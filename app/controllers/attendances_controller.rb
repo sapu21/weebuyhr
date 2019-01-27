@@ -12,8 +12,10 @@ class AttendancesController < ApplicationController
       @attendances = current_user.attendances
     end
 
-    @time_in_present = current_user.attendances.where('DATE(attendances.time_in) = ?', Date.today).present?
-    @time_out_present = current_user.attendances.where('DATE(attendances.time_out) = ?', Date.today).present?
+    @attendances = @attendances.order(created_at: :desc).page params[:page]
+
+    @time_in_present = current_user.attendances.where(time_in: Date.today.all_day).present?
+    @time_out_present = current_user.attendances.where(time_out: Date.today.all_day).present?
 
   end
 
@@ -72,6 +74,23 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to attendances_url, notice: 'Attendance was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def new_comment
+    @attendance = current_user.attendances.where(time_in: Date.today.all_day).last
+    if @attendance.blank?
+      redirect_to attendances_url, notice: "Please log you're time_in first!"
+    end
+  end
+
+  def create_comment
+    attendance = current_user.attendances.where(time_in: Date.today.all_day).last
+    if attendance.blank?
+      redirect_to attendances_url, notice: "Please log you're time_in first!"
+    else
+      attendance.update_attributes(time_out: DateTime.now, comments: "#{params[:comments1]}\n#{params[:comments2]}\n#{params[:comments3]}")
+      redirect_to attendances_url, notice: "Thanks for your contribution! Take Rest! See you soon!"
     end
   end
 
