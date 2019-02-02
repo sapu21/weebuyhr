@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :time_offs
   resources :attendances, only: [:index, :show] do
     get 'new_comment', on: :collection
     post 'create_comment', on: :collection

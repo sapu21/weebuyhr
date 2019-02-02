@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+
+<center>
+<p>
+  <strong>From date:</strong>
+  <%= @time_off.from_date %>
+</p>
+</centre>
+
+<center>
+<p>
+  <strong>To date:</strong>
+  <%= @time_off.to_date %>
+</p>
+</center>
+
+<center>
+
+<p>
+  <strong>Note:</strong>
+  <%= @time_off.note %>
+</p>
+
+</center>
+
+<center>
+<p>
+  <strong>User:</strong>
+  <%= "#{@time_off.user.first_name} #{@time_off.user.last_name}" %>
+</p>
+
+</center>
+
+<%= link_to 'Edit', edit_time_off_path(@time_off) %> |
+<%= link_to 'Back', time_offs_path %>

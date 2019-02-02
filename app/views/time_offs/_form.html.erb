@@ -1,0 +1,34 @@
+<%= form_with(model: time_off, local: true) do |form| %>
+  <% if time_off.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(time_off.errors.count, "error") %> prohibited this time_off from being saved:</h2>
+
+      <ul>
+      <% time_off.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :from_date %>
+    <%= form.datetime_select :from_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :to_date %>
+    <%= form.datetime_select :to_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_field :note %>
+  </div>
+
+  
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
