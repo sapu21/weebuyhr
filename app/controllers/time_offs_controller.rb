@@ -34,6 +34,7 @@ class TimeOffsController < ApplicationController
   # POST /time_offs.json
   def create
     @time_off = TimeOff.new(time_off_params)
+    LeaveMailer.with(user: @user).leave_email.deliver_later
 
     respond_to do |format|
       if @time_off.save
