@@ -4,6 +4,6 @@ class LeaveMailer < ApplicationMailer
   def leave_email
     @user = params[:user]
     @url  = 'http://localhost:3000/users/sign_in'
-    mail(to: @user.leave_email, subject: 'Application for leave')
+    mail(to: @user.email, subject: 'Application for leave')
   end
 end
