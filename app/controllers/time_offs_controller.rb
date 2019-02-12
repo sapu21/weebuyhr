@@ -34,11 +34,15 @@ class TimeOffsController < ApplicationController
   # POST /time_offs.json
   def create
     @time_off = TimeOff.new(time_off_params)
-    LeaveMailer.with(user: @user).leave_email.deliver
+    
+
 
     respond_to do |format|
       if @time_off.save
+        LeaveMailer.leave_email(@time_off.user).deliver
+
         format.html { redirect_to @time_off, notice: 'Time off was successfully created.' }
+       
         format.json { render :show, status: :created, location: @time_off }
       else
         format.html { render :new }

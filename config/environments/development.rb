@@ -31,11 +31,19 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
+  
 
-  config.action_mailer.perform_caching = false
+ActionMailer::Base.smtp_settings = {
+  :user_name => 'saptaswa18',
+  :password => 'saptaswa18',
+  :domain => 'weebuy.in',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
 
-  config.action_mailer.default_url_options = { :host => "localhost:3000"}
+
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
